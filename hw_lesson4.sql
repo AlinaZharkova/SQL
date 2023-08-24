@@ -1,13 +1,13 @@
 USE homework;
 
 -- Создание таблиц для выполнения домашнего задания
-CREATE TABLE  AUTO 
+CREATE TABLE AUTO 
 (       
-	REGNUM VARCHAR(10) PRIMARY KEY, 
-	MARK VARCHAR(10), 
-	COLOR VARCHAR(15),
-	RELEASEDT DATE, 
-	PHONENUM VARCHAR(15)
+    REGNUM VARCHAR(10) PRIMARY KEY, 
+    MARK VARCHAR(10), 
+    COLOR VARCHAR(15),
+    RELEASEDT DATE, 
+    PHONENUM VARCHAR(15)
 );
 
  -- AUTO
@@ -57,40 +57,40 @@ SELECT MARK, COLOR, COUNT(COLOR)
  
 SELECT DISTINCT MARK,
    (SELECT COUNT(*)
-	  FROM AUTO a1
-	 WHERE a1.MARK = a.MARK) AS amount_this_mark,
+      FROM AUTO a1
+     WHERE a1.MARK = a.MARK) AS amount_this_mark,
    (SELECT COUNT(*)
-	  FROM AUTO a1 
-	 WHERE a1.MARK != a.MARK) AS amount_another_mark
-FROM AUTO a;
+      FROM AUTO a1 
+     WHERE a1.MARK != a.MARK) AS amount_another_mark
+  FROM AUTO a;
 
 
  -- Задание № 3. Даны 2 таблицы, созданные следующим образом:
 
 create table test_a 
 (
-id INT,
-data1 VARCHAR(1)
+  id INT,
+  data1 VARCHAR(1)
 );
 
 create table test_b 
 (
-id INT
+  id INT
 );
 
 insert into test_a (id, data1) 
 values
-(10, 'A'),
-(20, 'A'),
-(30, 'F'),
-(40, 'D'),
-(50, 'C');
+  (10, 'A'),
+  (20, 'A'),
+  (30, 'F'),
+  (40, 'D'),
+  (50, 'C');
 
 insert into test_b(id) 
 values
-(10),
-(30),
-(50);
+  (10),
+  (30),
+  (50);
 
 
 -- Напишите запрос, который вернет строки из таблицы test_a, id которых нет в таблице test_b, НЕ используя ключевого слова NOT.
