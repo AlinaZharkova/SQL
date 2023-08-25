@@ -1,4 +1,4 @@
-   USE homework;
+USE homework;
 
 -- Создание и заполнение таблицы для домашнего задания
 CREATE TABLE cars
@@ -20,7 +20,7 @@ VALUES
     (8, "Volkswagen ", 21600);
     
 SELECT *
-  FROM cars;
+ FROM cars;
 
 
 -- Домашнее задание к семинару № 5
@@ -29,7 +29,7 @@ SELECT *
 CREATE VIEW CheapCars 
   AS SELECT id, car_model, cost 
        FROM Cars 
-	  WHERE Cost <= 25000;
+      WHERE Cost <= 25000;
     
      SELECT *
        FROM CheapCars;    
@@ -40,7 +40,7 @@ CREATE VIEW CheapCars
 ALTER VIEW CheapCars 
   AS SELECT id, car_model, cost 
        FROM Cars 
-	  WHERE Cost <= 30000;
+      WHERE Cost <= 30000;
       
      SELECT *
        FROM CheapCars;      
@@ -51,7 +51,7 @@ ALTER VIEW CheapCars
 CREATE VIEW Skoda_Audi 
   AS SELECT id, car_model, cost 
        FROM Cars 
-	  WHERE car_model IN ('Skoda','Audi');
+      WHERE car_model IN ('Skoda','Audi');
 
-	 SELECT *
+     SELECT *
        FROM Skoda_Audi; 
