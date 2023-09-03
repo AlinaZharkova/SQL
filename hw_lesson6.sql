@@ -9,7 +9,7 @@ USE homework;
 -- создаем таблицу users_old, для создания аналога users
 DROP TABLE IF EXISTS users_old;
 CREATE TABLE users_old (
-	id SERIAL PRIMARY KEY, -- SERIAL = BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE
+    id SERIAL PRIMARY KEY, -- SERIAL = BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE
     firstname VARCHAR(50),
     lastname VARCHAR(50) COMMENT 'Фамилия',
     email VARCHAR(120) UNIQUE
@@ -19,19 +19,19 @@ CREATE TABLE users_old (
 DROP PROCEDURE IF EXISTS sp_move_user;
 DELIMITER //
 CREATE PROCEDURE sp_move_user(IN user_id BIGINT)
-BEGIN
-DECLARE EXIT HANDLER FOR SQLEXCEPTION
-BEGIN
-ROLLBACK;
-END;
+  BEGIN
+  DECLARE EXIT HANDLER FOR SQLEXCEPTION
+   BEGIN
+   ROLLBACK;
+   END;
 -- в случае ошибки будет отмена всех изменений в таблицах
 
    START TRANSACTION; 
    -- Вытаскиваем все данные из начальной таблицы
-  SELECT *
-    INTO @user_id, @firstname, @lastname, @email
-    FROM users
-   WHERE id = user_id;
+   SELECT *
+     INTO @user_id, @firstname, @lastname, @email
+     FROM users
+    WHERE id = user_id;
    
    -- Вставляем полученные данные в нашу новую таблицу
    INSERT INTO users_old
@@ -62,20 +62,20 @@ SELECT * FROM users_old;
  DROP FUNCTION IF EXISTS sp_greetings;
  DELIMITER //
  CREATE FUNCTION sp_greetings()
- RETURNS VARCHAR(15)
- DETERMINISTIC
+   RETURNS VARCHAR(15)
+   DETERMINISTIC
  
  BEGIN
-  DECLARE greeting_text VARCHAR(15);
-  DECLARE curr_time TIME;
-  SET curr_time = CURRENT_TIME;
-  SET greeting_text = CASE
-	 WHEN curr_time BETWEEN '06:00:00' AND '11:59:59' THEN 'Доброе утро'
-     WHEN curr_time BETWEEN '12:00:00' AND '17:59:59' THEN 'Добрый день'
-	 WHEN curr_time BETWEEN '18:00:00' AND '23:59:59' THEN 'Добрый вечер'
-	 ELSE 'Доброй ночи'
-END;     
-RETURN greeting_text;
+   DECLARE greeting_text VARCHAR(15);
+   DECLARE curr_time TIME;
+   SET curr_time = CURRENT_TIME;
+   SET greeting_text = CASE
+      WHEN curr_time BETWEEN '06:00:00' AND '11:59:59' THEN 'Доброе утро'
+      WHEN curr_time BETWEEN '12:00:00' AND '17:59:59' THEN 'Добрый день'
+      WHEN curr_time BETWEEN '18:00:00' AND '23:59:59' THEN 'Добрый вечер'
+      ELSE 'Доброй ночи'
+ END;     
+ RETURN greeting_text;
 END//
 DELIMITER ;
    
